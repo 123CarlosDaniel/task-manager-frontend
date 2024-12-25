@@ -19,7 +19,7 @@ function App() {
       </Route>
       <Route path="auth" element={<AuthLayout />}>
         <Route index path="login" element={<LoginPage />} />
-        <Route index path="register" element={<SignUpPage />} />
+        <Route path="register" element={<SignUpPage />} />
       </Route>
     </Routes>
   )
