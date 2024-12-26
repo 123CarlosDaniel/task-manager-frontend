@@ -53,7 +53,7 @@ const TaskCard = ({ task }: { task: Task }) => {
         <TaskState state={task.state} />
       </CardContent>
       <CardFooter className="flex justify-around">
-        <TaskDialog task={task}>
+        <TaskDialog task={task} mode="update">
           <Button variant="outline">Update</Button>
         </TaskDialog>
         <Button variant="destructive" onClick={deleteTask}>

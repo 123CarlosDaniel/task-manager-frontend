@@ -25,38 +25,23 @@ import { Button } from "@/components/ui/button"
 import TaskState from "./TaskState"
 import { DialogClose } from "@/components/ui/dialog"
 import { useAppDispatch, useAppSelector } from "@/hooks/redux"
-import { updateTaskThunk } from "@/store/thunks/tasksThunks"
-import { toast } from "@/hooks/useToast"
+import { handleCreateTask, handleUpdateTask } from "@/store/handlers/taskFormHandler"
 
-const TaskForm = ({ task }: { task: Partial<Task> }) => {
+interface TaskFormProps {
+  task?: Partial<Task>,
+  mode?: "create" | "update" 
+}
+
+const TaskForm = ({ task = {}, mode = "update" }: TaskFormProps) => {
   const dispatch = useAppDispatch()
   const { session } = useAppSelector((state) => state.auth)
-  const {error} = useAppSelector((state) => state.tasks)
 
   const onSubmit = (data: z.infer<typeof taskSchema>) => {
-    dispatch(
-      updateTaskThunk({
-        id: task.id!,
-        accessToken: session?.access_token!,
-        refreshToken: session?.refresh_token!,
-        taskData: data,
-      })
-    ).then(()=>{
-      if(!error) {
-        toast({
-          title: "Task updated",
-          description: "Task updated successfully",
-          variant: "success",
-        })
-      }
-      if(error) {
-        toast({
-          title: "Task update failed",
-          description: error,
-          variant: "destructive",
-        })
-      }
-    })
+    if(mode === "update") {
+      handleUpdateTask(dispatch, session!, task, data)
+    } else if(mode === "create") {
+      handleCreateTask(dispatch, session!, data)
+    }
   }
 
   const taskForm = useForm<z.infer<typeof taskSchema>>({

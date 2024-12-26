@@ -1,4 +1,5 @@
 import {
+  createTaskService,
   deleteTaskService,
   getTasksService,
   updateTaskService,
@@ -63,6 +64,28 @@ export const deleteTaskThunk = createAsyncThunk(
   ) => {
     try {
       return await deleteTaskService(id, accessToken, refreshToken)
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.message)
+    }
+  }
+)
+
+export const createTaskThunk = createAsyncThunk(
+  "tasks/createTask",
+  async (
+    {
+      taskData,
+      accessToken,
+      refreshToken,
+    }: {
+      taskData: Partial<Task>
+      accessToken?: string
+      refreshToken?: string
+    },
+    thunkApi
+  ) => {
+    try {
+      return await createTaskService(taskData, accessToken, refreshToken)
     } catch (error: any) {
       return thunkApi.rejectWithValue(error.message)
     }

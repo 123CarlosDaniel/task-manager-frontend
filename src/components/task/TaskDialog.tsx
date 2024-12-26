@@ -10,18 +10,27 @@ import { ReactNode } from "react"
 import TaskForm from "./TaskForm"
 import { Task } from "@/types/task"
 
-const TaskDialog = ({ children, task }: { children: ReactNode, task: Partial<Task> }) => {
+interface TaskDialogProps {
+  task?: Partial<Task>
+  mode?: "create" | "update"
+  children: ReactNode
+}
+const TaskDialog = ({ children, task = {}, mode = "update" }: TaskDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit task</DialogTitle>
+          <DialogTitle>
+            {mode === "create" ? "Create" : "Update"} task
+          </DialogTitle>
           <DialogDescription>
-            Make changes to your task here. You can select the field to edit
+            {mode === "create"
+              ? "You can create a new task here"
+              : "Make changes to your task here. You can select the field to edit"}
           </DialogDescription>
         </DialogHeader>
-        <TaskForm task={task}/>
+        <TaskForm task={task} mode={mode}/>
       </DialogContent>
     </Dialog>
   )
