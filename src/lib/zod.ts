@@ -16,3 +16,15 @@ export const authSchema = z.object({
 })
 
 
+export const taskSchema = z.object({
+  title: z
+    .string({ required_error: "Title is required" })
+    .max(64, {
+      message: "Title must be less than 64 characters",
+    }),
+  description: z
+    .string({ required_error: "Description is required" }),
+  state: z
+    .number({ required_error: "State is required" })
+    .default(0),
+})

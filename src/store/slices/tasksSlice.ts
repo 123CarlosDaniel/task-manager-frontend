@@ -1,6 +1,6 @@
 import { Task } from "@/types/task"
 import { createSlice } from "@reduxjs/toolkit"
-import { fetchTasks } from "@/store/thunks/tasksThunks"
+import { fetchTasks, updateTask } from "@/store/thunks/tasksThunks"
 
 interface TasksState {
   tasks: Task[]
@@ -33,6 +33,20 @@ const tasksSlice = createSlice({
       })
       .addCase(fetchTasks.rejected, (state, action) => {
         ;(state.loading = false), (state.error = action.payload as string)
+      })
+      .addCase(updateTask.fulfilled, (state, action) => {
+        state.loading = false
+        const updatedTask = action.payload
+        const index = state.tasks.findIndex(
+          (task) => task.id === updatedTask.id
+        )
+        if (index !== -1) {
+          state.tasks[index] = updatedTask
+        }
+      })
+      .addCase(updateTask.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload as string
       })
   },
 })

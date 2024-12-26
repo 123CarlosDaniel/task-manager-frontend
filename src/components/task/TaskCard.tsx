@@ -7,25 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { MdOutlinePendingActions } from "react-icons/md"
-import { FaBarsProgress } from "react-icons/fa6"
-import { MdTaskAlt } from "react-icons/md"
-import { Task } from "@/types/task"
 
-const taskState = {
-  0: {
-    label: "Pending",
-    icon: <MdOutlinePendingActions className="text-red-500 size-6" />,
-  },
-  1: {
-    label: "In Progress",
-    icon: <FaBarsProgress className="text-blue-500 size-6" />,
-  },
-  2: {
-    label: "Completed",
-    icon: <MdTaskAlt className="text-green-500 size-6" />,
-  },
-}
+import { Task } from "@/types/task"
+import TaskDialog from "./TaskDialog"
+import TaskState from "./TaskState"
 
 const TaskCard = ({ task }: { task: Task }) => {
   return (
@@ -35,13 +20,12 @@ const TaskCard = ({ task }: { task: Task }) => {
         <CardDescription>{task.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="flex items-center gap-x-2">
-          {taskState[task.state as keyof typeof taskState].icon}
-          <span>{taskState[task.state as keyof typeof taskState].label}</span>
-        </div>
+        <TaskState state={task.state} />
       </CardContent>
       <CardFooter className="flex justify-around">
-        <Button variant="outline">Update</Button>
+        <TaskDialog task={task}>
+          <Button variant="outline">Update</Button>
+        </TaskDialog>
         <Button variant="destructive">Delete</Button>
       </CardFooter>
     </Card>
