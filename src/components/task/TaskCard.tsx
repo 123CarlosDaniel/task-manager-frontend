@@ -1,7 +1,3 @@
-/*
-title, description , state(completed, in progress, pending) (delete, update)
-*/
-
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -12,13 +8,14 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { MdOutlinePendingActions } from "react-icons/md"
-import { FaBarsProgress } from "react-icons/fa6";
-import { MdTaskAlt } from "react-icons/md";
+import { FaBarsProgress } from "react-icons/fa6"
+import { MdTaskAlt } from "react-icons/md"
+import { Task } from "@/types/task"
 
 const taskState = {
   0: {
     label: "Pending",
-    icon: <MdOutlinePendingActions className="text-red-500 size-6"/>,
+    icon: <MdOutlinePendingActions className="text-red-500 size-6" />,
   },
   1: {
     label: "In Progress",
@@ -30,16 +27,12 @@ const taskState = {
   },
 }
 
-const TaskCard = ({
-  task,
-}: {
-  task: { title: string; description: string; state: number }
-}) => {
+const TaskCard = ({ task }: { task: Task }) => {
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[350px] mx-auto">
       <CardHeader>
-        <CardTitle className="text-lg">Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
+        <CardTitle className="text-lg">{task.title}</CardTitle>
+        <CardDescription>{task.description}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex items-center gap-x-2">

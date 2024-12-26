@@ -3,7 +3,7 @@ import {
   signInWithEmail,
   signInWithProvider,
   signUpWithEmail,
-} from "@/services/auth"
+} from "@/services/authService"
 import { useNavigate } from "react-router"
 
 export const useAuth = () => {

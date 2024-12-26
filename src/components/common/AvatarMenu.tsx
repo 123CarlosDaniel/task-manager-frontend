@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { logOut } from "@/services/auth"
+import { logOut } from "@/services/authService"
 
 const AvatarMenu = ({ avatarUrl }: { avatarUrl: string }) => {
   return (
