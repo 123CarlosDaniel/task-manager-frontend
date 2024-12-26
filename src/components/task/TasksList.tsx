@@ -1,15 +1,22 @@
-import { useSelector } from "react-redux"
 import TaskCard from "./TaskCard"
-import { RootState } from "@/store/store"
-import useTasks from "@/hooks/useTasks"
 import TasksSkeleton from "../skeletons/TasksSkeleton"
+import { useAppDispatch, useAppSelector } from "@/hooks/redux"
+import { useEffect } from "react"
+import { fetchTasks } from "@/store/thunks/tasksThunks"
 
 const TasksList = () => {
-  const { session } = useSelector((state: RootState) => state.auth)
-  const { tasks, error, loading } = useTasks(
-    session?.access_token,
-    session?.refresh_token
-  )
+  const { session } = useAppSelector((state) => state.auth)
+  const dispatch = useAppDispatch()
+  const { tasks, error, loading } = useAppSelector((state) => state.tasks)
+
+  useEffect(() => {
+    dispatch(
+      fetchTasks({
+        accessToken: session?.access_token!,
+        refreshToken: session?.refresh_token!,
+      })
+    )
+  }, [dispatch, session?.access_token, session?.refresh_token])
 
   if (loading) return <TasksSkeleton />
   if (error) return <p>{error}</p>
