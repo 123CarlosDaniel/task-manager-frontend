@@ -1,5 +1,5 @@
-import { AppDispatch } from "@/store/store"
-import { setLoading, setSession } from "@/store/authSlice"
+import { AppDispatch } from "@/store"
+import { setLoading, setSession } from "@/store/slices/authSlice"
 import { supabase } from "@/supabase/client"
 
 export const initializeAuth = () => async (dispatch: AppDispatch) => {

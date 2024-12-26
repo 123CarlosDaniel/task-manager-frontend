@@ -1,11 +1,10 @@
 import TasksSkeleton from "@/components/skeletons/TasksSkeleton"
 import { Outlet, useNavigate } from "react-router"
 import { useEffect } from "react"
-import { useSelector } from "react-redux"
-import { RootState } from "@/store/store"
+import { useAppSelector } from "@/hooks/redux"
 
 const PrivateRoute = () => {
-  const { loading, session } = useSelector((state: RootState) => state.auth)
+  const { loading, session } = useAppSelector((state) => state.auth)
   const navigate = useNavigate()
 
   useEffect(() => {

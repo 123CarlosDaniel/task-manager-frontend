@@ -2,11 +2,10 @@ import { Outlet, useNavigate } from "react-router"
 import FormSkeleton from "@/components/skeletons/FormSkeleton"
 import { useEffect } from "react"
 import AuthNavbar from "@/layouts/AuthNavbar"
-import { useSelector } from "react-redux"
-import { RootState } from "@/store/store"
+import { useAppSelector } from "@/hooks/redux"
 
 const AuthLayout = () => {
-  const { loading, session } = useSelector((state: RootState) => state.auth)
+  const { loading, session } = useAppSelector((state) => state.auth)
   const navigate = useNavigate()
   useEffect(() => {
     if (session) {

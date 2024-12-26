@@ -4,8 +4,8 @@ import "./index.css"
 import App from "./App.tsx"
 import { BrowserRouter } from "react-router"
 import { Toaster } from "@/components/ui/toaster"
-import store from "@/store/store.ts"
-import { initializeAuth } from "@/store/authThunks.ts"
+import store from "@/store/index.ts"
+import { initializeAuth } from "@/store/thunks/authThunks.ts"
 import { Provider } from "react-redux"
 
 store.dispatch(initializeAuth())
