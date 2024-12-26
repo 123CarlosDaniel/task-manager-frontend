@@ -1,4 +1,4 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import AvatarDefault from "/avatar-default.svg"
 import {
   DropdownMenu,
@@ -12,14 +12,20 @@ import { logOut } from "@/services/authService"
 import { Link } from "react-router"
 import { IoMdInformationCircleOutline } from "react-icons/io"
 import { IoLogOutOutline } from "react-icons/io5"
-import { FaTasks } from "react-icons/fa";
+import { FaTasks } from "react-icons/fa"
+import { memo } from "react"
 
 const AvatarMenu = ({ avatarUrl }: { avatarUrl: string }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarImage src={avatarUrl || AvatarDefault} alt="user avatar" />
+          <AvatarImage
+            src={avatarUrl || AvatarDefault}
+            alt="user avatar"
+            referrerPolicy="no-referrer"
+          />
+          <AvatarFallback>U</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -49,4 +55,4 @@ const AvatarMenu = ({ avatarUrl }: { avatarUrl: string }) => {
   )
 }
 
-export default AvatarMenu
+export default memo(AvatarMenu)
