@@ -1,5 +1,9 @@
-import { getTasksService, updateTaskService } from "@/services/taskService"
-import { Task } from "@/types/task";
+import {
+  deleteTaskService,
+  getTasksService,
+  updateTaskService,
+} from "@/services/taskService"
+import { Task } from "@/types/task"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
 export const fetchTasks = createAsyncThunk(
@@ -19,7 +23,7 @@ export const fetchTasks = createAsyncThunk(
   }
 )
 
-export const updateTask = createAsyncThunk(
+export const updateTaskThunk = createAsyncThunk(
   "tasks/updateTask",
   async (
     {
@@ -37,6 +41,28 @@ export const updateTask = createAsyncThunk(
   ) => {
     try {
       return await updateTaskService(id, taskData, accessToken, refreshToken)
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.message)
+    }
+  }
+)
+
+export const deleteTaskThunk = createAsyncThunk(
+  "tasks/deleteTask",
+  async (
+    {
+      id,
+      accessToken,
+      refreshToken,
+    }: {
+      id: string
+      accessToken?: string
+      refreshToken?: string
+    },
+    thunkApi
+  ) => {
+    try {
+      return await deleteTaskService(id, accessToken, refreshToken)
     } catch (error: any) {
       return thunkApi.rejectWithValue(error.message)
     }

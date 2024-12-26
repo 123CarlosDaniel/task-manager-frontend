@@ -48,3 +48,27 @@ export const updateTaskService = async (
     throw new Error("Failed to connect to the server. Please try again later.")
   }
 }
+
+export const deleteTaskService = async (
+  id: string,
+  accessToken?: string,
+  refreshToken?: string,
+): Promise<Partial<Task>> => {
+  try{
+    const response = await apiClient.delete("/tasks/" + id, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "x-refresh-token": `${refreshToken}`,
+      }
+    })
+    return response.data
+  } catch (error: any) {
+    if (error.response) {
+      const { status, data } = error.response
+      console.error(`Error ${status}: ${data.error || data}`)
+      throw new Error(data.error || "An error ocurred while deleting task.")
+    }
+    console.log("Network error:", error.message)
+    throw new Error("Failed to connect to the server. Please try again later.")
+  }
+}

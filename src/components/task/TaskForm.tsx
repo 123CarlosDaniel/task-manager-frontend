@@ -25,7 +25,7 @@ import { Button } from "@/components/ui/button"
 import TaskState from "./TaskState"
 import { DialogClose } from "@/components/ui/dialog"
 import { useAppDispatch, useAppSelector } from "@/hooks/redux"
-import { updateTask } from "@/store/thunks/tasksThunks"
+import { updateTaskThunk } from "@/store/thunks/tasksThunks"
 import { toast } from "@/hooks/useToast"
 
 const TaskForm = ({ task }: { task: Partial<Task> }) => {
@@ -35,7 +35,7 @@ const TaskForm = ({ task }: { task: Partial<Task> }) => {
 
   const onSubmit = (data: z.infer<typeof taskSchema>) => {
     dispatch(
-      updateTask({
+      updateTaskThunk({
         id: task.id!,
         accessToken: session?.access_token!,
         refreshToken: session?.refresh_token!,

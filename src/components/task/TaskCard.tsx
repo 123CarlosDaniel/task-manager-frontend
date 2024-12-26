@@ -11,8 +11,38 @@ import {
 import { Task } from "@/types/task"
 import TaskDialog from "./TaskDialog"
 import TaskState from "./TaskState"
+import { useAppDispatch, useAppSelector } from "@/hooks/redux"
+import { deleteTaskThunk } from "@/store/thunks/tasksThunks"
+import { toast } from "@/hooks/useToast"
 
 const TaskCard = ({ task }: { task: Task }) => {
+  const dispatch = useAppDispatch()
+  const { session } = useAppSelector((state) => state.auth)
+  const { error } = useAppSelector((state) => state.tasks)
+
+  const deleteTask = () => {
+    dispatch(
+      deleteTaskThunk({
+        id: task.id!,
+        accessToken: session?.access_token!,
+        refreshToken: session?.refresh_token!,
+      })
+    ).then(() => {
+      if (error) {
+        toast({
+          title: "Task delete failed",
+          description: error,
+          variant: "destructive",
+        })
+        return
+      }
+      toast({
+        title: "Task deleted",
+        description: "Task deleted successfully",
+        variant: "success",
+      })
+    })
+  }
   return (
     <Card className="w-[350px] mx-auto">
       <CardHeader>
@@ -26,7 +56,9 @@ const TaskCard = ({ task }: { task: Task }) => {
         <TaskDialog task={task}>
           <Button variant="outline">Update</Button>
         </TaskDialog>
-        <Button variant="destructive">Delete</Button>
+        <Button variant="destructive" onClick={deleteTask}>
+          Delete
+        </Button>
       </CardFooter>
     </Card>
   )

@@ -1,6 +1,6 @@
 import { Task } from "@/types/task"
 import { createSlice } from "@reduxjs/toolkit"
-import { fetchTasks, updateTask } from "@/store/thunks/tasksThunks"
+import { deleteTaskThunk, fetchTasks, updateTaskThunk } from "@/store/thunks/tasksThunks"
 
 interface TasksState {
   tasks: Task[]
@@ -34,7 +34,7 @@ const tasksSlice = createSlice({
       .addCase(fetchTasks.rejected, (state, action) => {
         ;(state.loading = false), (state.error = action.payload as string)
       })
-      .addCase(updateTask.fulfilled, (state, action) => {
+      .addCase(updateTaskThunk.fulfilled, (state, action) => {
         state.loading = false
         const updatedTask = action.payload
         const index = state.tasks.findIndex(
@@ -44,7 +44,16 @@ const tasksSlice = createSlice({
           state.tasks[index] = updatedTask
         }
       })
-      .addCase(updateTask.rejected, (state, action) => {
+      .addCase(updateTaskThunk.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload as string
+      })
+      .addCase(deleteTaskThunk.fulfilled, (state, action) => {
+        state.loading = false
+        const deletedTaskId = action.payload.id!
+        state.tasks = state.tasks.filter((task) => task.id != deletedTaskId)
+      })
+      .addCase(deleteTaskThunk.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload as string
       })
