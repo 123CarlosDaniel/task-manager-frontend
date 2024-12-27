@@ -26,7 +26,7 @@ const AuthLayout = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen px-4">
       <AuthNavbar />
       <div className="grid flex-1 place-items-center">
         <Outlet />

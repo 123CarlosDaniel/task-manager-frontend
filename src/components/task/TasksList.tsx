@@ -22,7 +22,7 @@ const TasksList = () => {
   if (error) return <p>{error}</p>
 
   return (
-    <div className="grid items-center justify-center grid-cols-3 pt-6 pb-2 gap-x-4 gap-y-12">
+    <div className="grid items-center justify-center grid-cols-1 pt-6 pb-2 md:grid-cols-2 xl:grid-cols-3 gap-x-4 md:gap-y-12 2xl:grid-cols-4 gap-y-4">
       {tasks.map((task) => (
         <TaskCard key={task.id} task={task} />
       ))}

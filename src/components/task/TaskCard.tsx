@@ -46,9 +46,9 @@ const TaskCard = ({ task }: { task: Task }) => {
     })
   }
   return (
-    <Card className="w-[350px] mx-auto">
+    <Card className="w-[300px] sm:w-[350px] mx-auto">
       <CardHeader>
-        <CardTitle className="text-lg">{task.title}</CardTitle>
+        <CardTitle className="text-base sm:text-lg">{task.title}</CardTitle>
         <CardDescription>{task.description}</CardDescription>
       </CardHeader>
       <CardContent>

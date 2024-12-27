@@ -5,15 +5,17 @@ const RedirectButton = ({
   to,
   label,
   className,
+  variant = "outline",
 }: {
   to: string
   label: string
   className?: string
+  variant?: any
 }) => {
   const navigate = useNavigate()
   return (
     <Button
-      variant={"outline"}
+      variant={variant}
       size={"sm"}
       onClick={() => navigate(to)}
       className={className}

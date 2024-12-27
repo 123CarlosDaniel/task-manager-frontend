@@ -19,7 +19,7 @@ const AvatarMenu = ({ avatarUrl }: { avatarUrl: string }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar className="cursor-pointer">
+        <Avatar className="p-1 border border-solid cursor-pointer border-slate-600 size-8 sm:size-10">
           <AvatarImage
             src={avatarUrl || AvatarDefault}
             alt="user avatar"

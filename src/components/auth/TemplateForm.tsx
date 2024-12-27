@@ -43,7 +43,7 @@ const TemplateForm = ({
       <Form {...loginForm}>
         <form
           onSubmit={loginForm.handleSubmit(onSubmit)}
-          className="space-y-8 flex flex-col w-[500px] shadow-lg shadow-gray-300 p-4 rounded-md"
+          className="space-y-8 flex flex-col max-w-full sm:w-[500px] shadow-lg shadow-gray-300 p-4 rounded-md"
         >
           <h1 className="text-lg font-medium text-center">{label}</h1>
           <FormField
