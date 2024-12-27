@@ -1,12 +1,14 @@
 import { Route, Routes } from "react-router"
 import "./App.css"
 import HomePage from "@/pages/home"
-import LoginPage from "@/pages/login"
-import TasksPage from "@/pages/tasks"
 import AuthLayout from "@/layouts/AuthLayout"
-import SignUpPage from "@/pages/signup"
 import HomeLayout from "@/layouts/HomeLayout"
 import PrivateRoute from "@/layouts/PrivateRoute"
+import React from "react"
+
+const LoginPage = React.lazy(() => import("@/pages/login"))
+const SignUpPage = React.lazy(() => import("@/pages/signup"))
+const TasksPage = React.lazy(() => import("@/pages/tasks"))
 
 function App() {
   return (

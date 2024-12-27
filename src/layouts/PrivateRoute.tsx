@@ -1,6 +1,6 @@
 import TasksSkeleton from "@/components/skeletons/TasksSkeleton"
 import { Outlet, useNavigate } from "react-router"
-import { useEffect } from "react"
+import { Suspense, useEffect } from "react"
 import { useAppSelector } from "@/hooks/redux"
 
 const PrivateRoute = () => {
@@ -21,7 +21,11 @@ const PrivateRoute = () => {
     return null
   }
 
-  return <Outlet />
+  return (
+    <Suspense fallback={<TasksSkeleton />}>
+      <Outlet />
+    </Suspense>
+  )
 }
 
 export default PrivateRoute

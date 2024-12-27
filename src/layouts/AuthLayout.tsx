@@ -3,6 +3,7 @@ import FormSkeleton from "@/components/skeletons/FormSkeleton"
 import { useEffect } from "react"
 import AuthNavbar from "@/layouts/AuthNavbar"
 import { useAppSelector } from "@/hooks/redux"
+import { Suspense } from "react"
 
 const AuthLayout = () => {
   const { loading, session } = useAppSelector((state) => state.auth)
@@ -15,9 +16,7 @@ const AuthLayout = () => {
 
   if (loading) {
     return (
-      <div className="grid min-h-screen place-items-center">
-        <FormSkeleton />
-      </div>
+      <LoadingFormSkeleton />
     )
   }
 
@@ -26,13 +25,23 @@ const AuthLayout = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen px-4">
-      <AuthNavbar />
-      <div className="grid flex-1 place-items-center">
-        <Outlet />
+    <Suspense fallback={<LoadingFormSkeleton />}>
+      <div className="flex flex-col min-h-screen px-4">
+        <AuthNavbar />
+        <div className="grid flex-1 place-items-center">
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </Suspense>
   )
 }
 
 export default AuthLayout
+
+const LoadingFormSkeleton = () => {
+  return (
+    <div className="grid min-h-screen place-items-center">
+      <FormSkeleton />
+    </div>
+  )
+}
