@@ -1,3 +1,4 @@
+import { APP_URL } from "@/lib/vars"
 import { supabase } from "@/supabase/client"
 
 export const signInWithEmail = async (email: string, password: string) => {
@@ -8,7 +9,7 @@ export const signInWithProvider = async (provider: "google" | "github") => {
   return await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: "/tasks",
+      redirectTo: `${APP_URL}/tasks`,
     },
   })
 }

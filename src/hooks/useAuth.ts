@@ -33,12 +33,7 @@ export const useAuth = () => {
       variant: "success",
       duration: 3000,
     })
-    await new Promise((res: any) => {
-      setTimeout(() => {
-        navigate("/")
-        res(null)
-      }, 1000)
-    })
+    navigate("/tasks")
   }
 
   const register = async ({
