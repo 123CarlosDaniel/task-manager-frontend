@@ -121,7 +121,7 @@ const TaskForm = ({ task = {}, mode = "update" }: TaskFormProps) => {
           )}
         />
         <div className="flex justify-around">
-          <Button type="submit">Submit</Button>
+          <Button type="submit" variant={"purple"}>Submit</Button>
           <DialogClose asChild>
             <Button variant={"destructive"} type="button">
               Cancel

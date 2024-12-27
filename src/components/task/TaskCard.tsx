@@ -14,6 +14,8 @@ import TaskState from "./TaskState"
 import { useAppDispatch, useAppSelector } from "@/hooks/redux"
 import { deleteTaskThunk } from "@/store/thunks/tasksThunks"
 import { toast } from "@/hooks/useToast"
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const TaskCard = ({ task }: { task: Task }) => {
   const dispatch = useAppDispatch()
@@ -54,10 +56,12 @@ const TaskCard = ({ task }: { task: Task }) => {
       </CardContent>
       <CardFooter className="flex justify-around">
         <TaskDialog task={task} mode="update">
-          <Button variant="outline">Update</Button>
+          <Button variant={"ghost"} className="rounded-full">
+            <FaEdit className="text-blue-500"/> Edit
+          </Button>
         </TaskDialog>
-        <Button variant="destructive" onClick={deleteTask}>
-          Delete
+        <Button variant={"ghost"} onClick={deleteTask} className="rounded-full">
+          <MdDelete className="text-red-500" /> Delete
         </Button>
       </CardFooter>
     </Card>

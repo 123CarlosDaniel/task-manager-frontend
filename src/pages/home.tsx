@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button"
 import { MdOutlineTaskAlt } from "react-icons/md"
 import { Link } from "react-router"
-import { MdOutlineStart } from "react-icons/md";
-
+import { MdOutlineStart } from "react-icons/md"
 
 function HomePage() {
   return (
-    <div className="flex flex-col px-10 gap-y-4">
+    <div className="flex flex-col px-16 gap-y-4">
       <div className="flex items-center pt-4 mx-auto gap-x-2 w-fit">
         <h1 className="flex items-baseline text-xl gap-x-2">
           Welcome to
@@ -29,18 +28,22 @@ function HomePage() {
         <h3 className="text-lg font-semibold">Features</h3>
         <p>Task Manager has the following features:</p>
         <ul className="list-disc list-inside">
-          <li>Authentication</li>
-          <li>Task Creation</li>
-          <li>Task Edition</li>
-          <li>Task Deletion</li>
+          <li>Task Creation, Update, and Deletion</li>
+          <li>Supabase Authentication integration</li>
+          <li>Api Integration</li>
+          <li>Management state with React Redux Toolkit</li>
+          <li>Management routes with React Router</li>
+          <li>Type checking and validation with Zod, Typescript and React Hook Form</li>
+          <li>Custom hooks and custom components</li>
         </ul>
       </div>
       <div className="flex items-baseline gap-x-6">
         <h3 className="text-lg font-medium">Start using Task Manager</h3>
         <Link to="/tasks">
-          <Button variant="outline">
-            <MdOutlineStart className="mr-2 text-orange-500 size-6" />
-            Go to tasks</Button>
+          <Button variant="outlineGreen">
+            <MdOutlineStart className="mr-2 font-semibold text-orange-500 size-6" />
+            Go to tasks
+          </Button>
         </Link>
       </div>
     </div>

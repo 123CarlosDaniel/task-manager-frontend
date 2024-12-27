@@ -7,7 +7,7 @@ function TasksPage() {
     <div className="w-full">
       <div className="sticky top-0 flex justify-end w-full pt-4 pb-2 bg-white bg-opacity-10 pe-7 backdrop-blur-sm">
         <TaskDialog mode="create">
-          <Button type="button">Create task</Button>
+          <Button type="button" variant={"sky"}>Create task</Button>
         </TaskDialog>
       </div>
       <TasksList />
